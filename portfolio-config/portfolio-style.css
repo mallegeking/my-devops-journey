@@ -1,0 +1,47 @@
+/* Dark Mode DevOps Portfolio */
+
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 2rem;
+}
+
+h1,
+h2,
+h3 {
+    color: #00bcd4;
+    margin-top: 1.5rem;
+}
+
+a {
+    color: #90caf9;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+code,
+pre {
+    background-color: #1e1e1e;
+    color: #f78c6c;
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    font-family: "Fira Code", monospace;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.card {
+    background-color: #1e1e1e;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+}
