@@ -22,7 +22,7 @@ And that’s exactly the kind of challenge I enjoy!
 ### 📅 Long-Term Goals
 
 - Become a certified cloud DevOps engineer (AWS/GCP)
-- Venture into MLOPs
+- Venture into MLOps
 - Contribute to open source DevOps tools
 - Help others on the same path
 
