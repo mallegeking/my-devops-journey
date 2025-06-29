@@ -5,7 +5,7 @@ Hello! I'm Priviledge Zvidzai, a passionate learner and aspiring **DevOps Engine
 ### 🔧 Background
 
 - 🌍 I'm based in Aachen, Germany but I am originally from Zimbabwe, from a city called Chitungwiza
-- 💼 Currently [your current job/studies or "exploring a career in tech"]
+- 💼 Currently doing an apprenticeship as an IT Specialist for system integration at the RWTH University and Berufskolleg für Gestaltung und Technik in Aachen
 - 🧠 Self-taught learner focusing on Linux, automation, and cloud platforms
 
 ### 🎯 Why DevOps?
@@ -22,6 +22,7 @@ And that’s exactly the kind of challenge I enjoy!
 ### 📅 Long-Term Goals
 
 - Become a certified cloud DevOps engineer (AWS/GCP)
+- Venture into MLOPs
 - Contribute to open source DevOps tools
 - Help others on the same path
 
