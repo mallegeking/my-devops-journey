@@ -1,4 +1,4 @@
-# 📅 Month (June) 2025 — My DevOps Progress
+# 📅 Month (July) 2025 — My DevOps Progress
 
 ## Here is where I will write about everything I have covered during the first Month
 
@@ -26,3 +26,13 @@ Advanced Topics like Rebasing, Tagging and Stashing
 ## Aha moment 🤯
 
 - When I started learning Git, I already knew the basics like cloning from a remote repository, adding files, committing changes, and pushing to a remote repository. So I didn't really need to learn it all from scratch. However all this time, I didn't know that Git and Github are not the same thing. Going through the book and reading more about the Git Internals helped me understand more. I still use the book as a reference when I need an indepth understanding of certain aspects of Git. Learning git was definitely worth the time. Now I can navigat the system more confidently and consciously.
+
+## Learning Linux Basics:
+
+# Resources:
+
+[Linux Journey](https://linuxjourney.com/)
+
+- learned the fundamentals of the command line, navigating files and directories.
+- I have become comfortable moving around a computer using the terminal.
+- Currently learning how to manipulate strings.
