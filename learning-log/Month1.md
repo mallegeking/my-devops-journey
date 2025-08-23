@@ -29,10 +29,20 @@ Advanced Topics like Rebasing, Tagging and Stashing
 
 ## Learning Linux Basics:
 
+Funfact: Everything in Linux is a file, even the command line. Let that sink in lol 🤯
+
 # Resources:
 
+[Hack the box](https://app.hackthebox.com/)
 [Linux Journey](https://linuxjourney.com/)
 
 - learned the fundamentals of the command line, navigating files and directories.
 - I have become comfortable moving around a computer using the terminal.
 - Currently learning how to manipulate strings.
+
+## Linux Directory Structure:
+
+Resources: [Linux Directory Structure](https://www.geeksforgeeks.org/linux-unix/linux-directory-structure/)
+
+- The Linux file system (FHS -> Filesystem Hierarchy Standard) is a tree-like structure, with directories as the nodes and files as the leaves. It's a hierarchical organization that allows for easy organization and navigation of files and directories.
+  -Types of files in Linux: General files, Directory Files and Device files
