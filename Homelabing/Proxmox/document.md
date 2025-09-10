@@ -9,3 +9,5 @@
 - This channel has a Full Course on Proxmox and it is very well done. It's definitely worth checking out if you want a solid understanding of Proxmox.
 
 ## What I did so far:
+
+## Next Steps:
