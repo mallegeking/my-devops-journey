@@ -7,6 +7,7 @@ The goal is to **learn Linux deeply**, experiment with system internals, and sha
 ---
 
 ## 🎯 Project Goals
+
 - Read the documentation 😭
 - Understand the Linux boot process (bootloader → kernel → init → user space).
 - Learn how to compile and configure a custom Linux kernel.
@@ -51,10 +52,10 @@ gentoo-lab/
 ├── python-build-flags.md
 └── ...
 
-
 ---
 
 ## 🚀 How to Use This Repo
+
 - Browse `installation/` for a step-by-step guide to setting up Gentoo.
 - Check `configs/` if you want reference configurations.
 - Explore `notes/` for reflections and Linux lessons.
@@ -64,6 +65,7 @@ gentoo-lab/
 ---
 
 ## 🌱 Learning Roadmap
+
 - [ ] Partition and set up filesystems
 - [ ] Configure Portage and USE flags
 - [ ] Build and install the Linux kernel
@@ -75,6 +77,7 @@ gentoo-lab/
 ---
 
 ## 🛠️ Tools Used
+
 - **Gentoo Linux** – source-based Linux distribution
 - **Portage** – Gentoo’s package management system
 - **Shell scripting** – automation and setup helpers
@@ -83,6 +86,7 @@ gentoo-lab/
 ---
 
 ## 📖 Resources
+
 - [Gentoo Handbook](https://wiki.gentoo.org/wiki/Handbook:Main_Page)
 - [Gentoo Wiki](https://wiki.gentoo.org/)
 - [Kernel Newbies](https://kernelnewbies.org/)
@@ -90,6 +94,6 @@ gentoo-lab/
 ---
 
 ## ✨ Author
-Project by **[Your Name]**  
-Feel free to fork, open issues, or contribute suggestions!
 
+Project by **Priviledge Zvidzai**  
+Feel free to fork, open issues, or contribute suggestions!
