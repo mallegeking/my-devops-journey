@@ -46,3 +46,12 @@ Resources: [Linux Directory Structure](https://www.geeksforgeeks.org/linux-unix/
 
 - The Linux file system (FHS -> Filesystem Hierarchy Standard) is a tree-like structure, with directories as the nodes and files as the leaves. It's a hierarchical organization that allows for easy organization and navigation of files and directories.
   -Types of files in Linux: General files, Directory Files and Device files
+
+
+## Topics covered in the last time:
+- working with the text editor Vim
+- User Management
+- Permissions and Processes.
+These topics are foundational and have helped me understand more about the idea and the power behind using linux systems
+The coolest thing I learned was about the Terminal. There are two types of terminals: regular terminal devices and pseudoterminal devices. On my Ubuntu system, I can switch back and forth between these using Ctrl + Alt + F3 and Ctrl + Alt + F2.
+Definitely try this out and look it up to learn more about it
