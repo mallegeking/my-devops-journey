@@ -60,8 +60,32 @@ Resources: [Linux Directory Structure](https://www.geeksforgeeks.org/linux-unix/
 
 - The kernel is the core of the operating system and is responsible for managing the hardware and software components of the system.
   /boot --> location of the kernel
-  > strace ls --> command to see system calls made by the ls command
+
+# Commands
+
+> strace ls --> command to see system calls made by the ls command
 
 > uname -r --> command to see the kernel version
 
 > lsmod --> command to see loaded modules
+
+## Init
+
+- System V Overview:
+- the primary role of an init system is to start and stop essential processes
+- 3 Major init implementations in linux are: upstart, systemd, and System V initaka SysV
+
+# Commands
+
+> service example service --status-all --> command to see status of all services
+> initctl list --> command to see a list of all known Upstart jobs and their current states
+> systemctl list-units --> command to see a list of all active units systemd is currently managing
+
+## Process Utilization
+
+# Commands
+
+> top --> tracks what your processes are doing in real time
+> htop --> like top but is more user friendly
+> lsof --> shows open files and processes that are using them
+> fuser --> identifies which processes are using specific files, sockets or filesystems
