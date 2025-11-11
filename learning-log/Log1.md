@@ -82,3 +82,10 @@ Resources: [Linux Directory Structure](https://www.geeksforgeeks.org/linux-unix/
 > systemctl list-units --> command to see a list of all active units systemd is currently managing
 
 ## Process Utilization
+
+# Commands
+
+> top --> tracks what your processes are doing in real time
+> htop --> like top but is more user friendly
+> lsof --> shows open files and processes that are using them
+> fuser --> identifies which processes are using specific files, sockets or filesystems
