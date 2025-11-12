@@ -89,3 +89,24 @@ Resources: [Linux Directory Structure](https://www.geeksforgeeks.org/linux-unix/
 > htop --> like top but is more user friendly
 > lsof --> shows open files and processes that are using them
 > fuser --> identifies which processes are using specific files, sockets or filesystems
+
+- Process Threads: Threads are units of execution within a process and are often called light weight processes.
+- There are single threaded and multi threaded processes.
+- All processes start out single-threaded.
+
+# CPU Monitoring
+
+> uptime
+> cat /proc/cpuinfo --> view the number of cores on your system
+
+# I/O Monitoring
+
+> iostat
+
+# Memory Monitoring
+
+> vmstat
+
+# Continous Monitoring
+
+> sudo sar -q
