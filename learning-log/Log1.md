@@ -110,3 +110,13 @@ Resources: [Linux Directory Structure](https://www.geeksforgeeks.org/linux-unix/
 # Continous Monitoring
 
 > sudo sar -q
+> there are many other options
+
+To install sar, run: sudo apt install sysstat on ubuntu
+
+modify the /etc/default/sysstat file's enabled field to start collecting data.
+
+## Cron Jobs
+
+- Powerful tool for linux automation.
+  > crontab -e allows you to add or edit cron jobs
