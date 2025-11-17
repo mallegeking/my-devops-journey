@@ -18,3 +18,15 @@
 
 ## Network sharing
 - The secure copy command (SCP) --> works like cp but has extended capabilities across networks. Operates over SSH
+- rsync stands for remote synchronization.  Essential tool for copying files between hosts.
+
+## Commands 
+> scp
+> rsnyc
+
+## Simple HTTP Server
+- Python allows you to instantly create a webserver, useful for sharing files over the network.
+
+> python -m http.server
+
+## NFS
