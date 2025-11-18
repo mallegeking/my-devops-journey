@@ -30,3 +30,12 @@
 > python -m http.server
 
 ## NFS
+
+> NFS --> Network File System
+ - Standard protocol for file sharing in Linux 
+
+ ## Samba
+ > SMB Protocol --> Server Message Block
+ 
+# Network Basics
+- I got the basics down already
