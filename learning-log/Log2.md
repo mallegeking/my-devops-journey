@@ -48,4 +48,5 @@
 > ip addr show --> finding your IP Address, modern approach
 
 
-
+# On the topic of Networks on this site --> https://labex.io/linuxjourney
+Goal is to know the topics back to back 
