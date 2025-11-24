@@ -49,4 +49,6 @@
 
 
 # On the topic of Networks on this site --> https://labex.io/linuxjourney
-Goal is to know the topics back to back 
+Goal is to know the topics back to back
+OSI Model
+TCP/IP Model
