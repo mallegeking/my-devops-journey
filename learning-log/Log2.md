@@ -53,4 +53,4 @@ Goal is to know the topics back to back
 OSI Model
 TCP/IP Model
 
-Today I got nothing to add
+Want to work on a small project instead. Setup a proxy
