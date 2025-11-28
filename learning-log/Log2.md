@@ -38,4 +38,19 @@
  > SMB Protocol --> Server Message Block
  
 # Network Basics
-- I got the basics down already
+- I got most of the basics down
+
+
+- Moving on to Subnetting
+
+## Subnetting
+> ifconfig -a --> finding your IP Address 
+> ip addr show --> finding your IP Address, modern approach
+
+
+# On the topic of Networks on this site --> https://labex.io/linuxjourney
+Goal is to know the topics back to back
+OSI Model
+TCP/IP Model
+
+Want to work on a small project instead. Setup a proxy
