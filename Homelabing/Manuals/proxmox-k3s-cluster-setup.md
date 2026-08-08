@@ -200,3 +200,89 @@ k3s-node-2   Ready    <none>          5m27s   v1.36.3+k3s1
 ```
 
 All three nodes `Ready`. Minor version difference between server and agents (`v1.36.2` vs `v1.36.3`) is normal for k3s and not a problem.
+
+## 11. kubectl access without sudo
+
+Running `kubectl` as a regular user initially failed:
+
+```
+WARN[0000] Unable to read /etc/rancher/k3s/k3s.yaml, please start server with --write-kubeconfig-mode or --write-kubeconfig-group to modify kube config permissions
+error: error loading config file "/etc/rancher/k3s/k3s.yaml": open /etc/rancher/k3s/k3s.yaml: permission denied
+```
+
+K3s's admin kubeconfig lives at `/etc/rancher/k3s/k3s.yaml`, readable only by root by default.
+
+Copying it to the standard location isn't enough on its own, since the `kubectl` command that ships with k3s is a symlink to the `k3s` binary itself, and that version hardcodes `/etc/rancher/k3s/k3s.yaml` as its default. Unlike standalone/upstream `kubectl`, it does **not** automatically fall back to `~/.kube/config`, that has to be pointed at explicitly.
+
+```
+mkdir -p ~/.kube
+sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+sudo chown $(id -u):$(id -g) ~/.kube/config
+chmod 600 ~/.kube/config
+export KUBECONFIG=~/.kube/config
+echo 'export KUBECONFIG=~/.kube/config' >> ~/.bashrc
+```
+
+The `export` line applies immediately for the current session, the line appended to `~/.bashrc` makes it persist across future logins. Confirmed working, `kubectl` commands run without `sudo` afterward.
+
+## 12. Test workload: nginx through Traefik ingress
+
+Proving the cluster actually works end to end, not just that nodes report `Ready`: a pod can schedule anywhere, the network between nodes functions, and something inside the cluster is reachable from outside it.
+
+Deployed nginx and exposed it as a Service:
+
+```
+kubectl create deployment nginx-test --image=nginx
+kubectl expose deployment nginx-test --port=80
+kubectl scale deployment nginx-test --replicas=3
+```
+
+With 3 replicas, one landed on each node, confirming agent scheduling and the Flannel network between nodes both work:
+
+```
+NAME                         STATUS    NODE
+nginx-test-c8697b5cc-544pw   Running   k3s-ctrlr
+nginx-test-c8697b5cc-g76wj   Running   k3s-node-1
+nginx-test-c8697b5cc-rvznd   Running   k3s-node-2
+```
+
+A Service alone is only reachable from inside the cluster. To reach it from outside, an Ingress resource was added, a routing rule that tells Traefik (bundled with k3s by default, no separate install) which hostname should be forwarded to which Service:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-test
+spec:
+  rules:
+  - host: nginx-test.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-test
+            port:
+              number: 80
+```
+
+```
+kubectl apply -f nginx-test-ingress.yaml
+```
+
+Tested from a separate machine on the LAN (not from any cluster node itself, since the point is proving external reachability):
+
+```
+curl -H "Host: nginx-test.local" http://192.168.178.134/
+```
+
+**Confirmed working**, returned nginx's default welcome page. End-to-end chain verified: external request → Traefik ingress → Service → pod.
+
+To view it in a browser instead of curl, added a hosts file entry on the client machine (`C:\Windows\System32\drivers\etc\hosts`, edited as Administrator):
+
+```
+192.168.178.134    nginx-test.local
+```
+
+Then `http://nginx-test.local` resolves straight to the cluster.
