@@ -1,6 +1,8 @@
 # Deep block reference
 
-What to actually do when the calendar says "deep block." Each block is one numbered session, roughly 2 hours. Every session ends with something that runs or is committed to git. If you do not finish a session, carry it into the next block of the same track. Do not skip ahead. These are a reference, not deadlines. Slower is fine, vague is not.
+> **Historical.** The session plan moved to the Notion "Threads" database (Track: Infra / AI & Automation). Kept for the reasoning behind the two-track structure. Do not add new sessions here.
+
+These are a reference, not deadlines. Slower is fine, vague is not.
 
 Two tracks, two sessions each per week:
 - Infra runs Monday and Thursday.

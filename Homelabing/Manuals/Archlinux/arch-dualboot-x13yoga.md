@@ -6,14 +6,13 @@
 **Goal:** Arch Linux alongside Windows 11, shared EFI partition, UEFI mode, hibernation working
 
 This log records both what was done and why. The reasoning matters more than the commands,
-because the commands are on the wiki and the reasoning is what you will have forgotten in
+because the commands are on the wiki and the reasoning is what I will have forgotten in
 six months when something breaks.
 
 ---
 
 ## Key values for this machine
 
-Write these down. Several of them are needed again later.
 
 | Thing | Value |
 |---|---|
@@ -290,7 +289,7 @@ findmnt -R /mnt
 ```
 
 **Only p5 gets formatted.** Running `mkfs` on `/dev/nvme0n1p1` destroys the shared ESP and
-Windows stops booting. This is the single most common way a dual-boot install goes wrong.
+Windows stops booting.
 
 `findmnt -R /mnt` should show exactly two lines. Linux allows stacking mounts on the same
 path, so running the mount commands twice hides the first mount under the second and
@@ -372,8 +371,8 @@ to exist, and in a bare chroot they are empty directories. `pacman` cannot verif
 `chroot`. It also copies in `/etc/resolv.conf` so DNS works inside. On `exit` it unmounts
 what it set up.
 
-**Consequence:** you are configuring a system that is not running. No init, no systemd, no
-services. That is why pacstrap printed `Skipped: Running in chroot`, and why `systemctl
+**Consequence:** configuring a system that is not running. No init, no systemd, no
+services. Pacstrap prints `Skipped: Running in chroot`, and `systemctl
 enable` works inside but `systemctl start` does not.
 
 ### 4.2 Time and locale
@@ -410,8 +409,7 @@ This is what the `sd-vconsole` mkinitcpio warning during pacstrap was about. The
 not exist yet, so the initramfs fell back to defaults. It gets picked up on the next
 initramfs rebuild, which `grub-mkconfig` and any kernel update will trigger.
 
-Use `de-latin1-nodeadkeys` instead if you do not want `^`, `` ` `` and `´` to behave as dead
-keys.
+Used `de-latin1-nodeadkeys`
 
 This covers the TTY only. A graphical session sets its layout separately.
 
@@ -428,9 +426,6 @@ echo "VeraX13" > /etc/hostname
 ::1         localhost
 127.0.1.1   VeraX13.fitz.box VeraX13
 ```
-
-Note: Fritz!Box's default domain is `fritz.box` with an `r`. `fitz.box` here is likely a
-typo. Harmless, since `127.0.1.1` is purely local, but worth correcting.
 
 ### 4.5 Users
 
@@ -589,10 +584,6 @@ reboot
 Order matters: `swapoff` before `umount`, since the swap file lives on the filesystem being
 unmounted. Note the paths regain the `/mnt` prefix once outside the chroot.
 
-**Do not paste this as a block.** `exit` terminates the chroot shell immediately and the
-remaining lines sitting in the input buffer get flushed rather than executed by the parent
-shell. Run them one at a time, waiting for each to return.
-
 If `umount -R /mnt` reports the target is busy, `fuser -vm /mnt` shows what is holding it.
 Usual cause is a shell whose working directory is under `/mnt`, fixed with `cd /`.
 
@@ -631,10 +622,9 @@ is correct.
 
 ## Remaining
 
-- [ ] Boot Windows once and confirm it still starts
-- [ ] Set `RealTimeIsUniversal` in the Windows registry (see 1.3) to fix the two-hour clock skew
-- [ ] Fix `fitz.box` typo in `/etc/hosts` if unintended (Fritz!Box default is `fritz.box`)
-- [ ] Install a desktop environment
+- [x] Boot Windows once and confirm it still starts
+- [x] Set `RealTimeIsUniversal` in the Windows registry (see 1.3) to fix the two-hour clock skew
+- [x] Install a desktop environment
 - [ ] Re-enable Secure Boot with `sbctl` signing (optional)
 - [ ] When Windows is removed: grow p5, then **re-run `filefrag` and update `resume_offset`**, or
       hibernation will silently cold-boot instead of resuming
@@ -712,8 +702,6 @@ Both desktops can coexist, selected at the login screen. The friction is real th
 - **Menu clutter.** Every KDE app appears in GNOME's launcher and vice versa.
 - **Mimetype defaults fight.** Installing one desktop reassigns defaults the other set.
 
-Nothing breaks. It is just untidy. Fine for evaluation, worth cleaning up once one wins.
-
 ```bash
 sudo pacman -S plasma-meta
 sudo pacman -S dolphin konsole ark gwenview okular spectacle kate kcalc
@@ -737,10 +725,6 @@ sudo systemctl enable sddm
 
 Disable before enable. Only one can own the `display-manager.service` symlink and `enable`
 fails while the other holds it.
-
-**Always pick the Wayland session at login.** The X11 session is also listed. On a
-convertible, X11 means no automatic rotation, no pen pressure, and blurry fractional
-scaling. It exists for compatibility, not for this hardware.
 
 ---
 

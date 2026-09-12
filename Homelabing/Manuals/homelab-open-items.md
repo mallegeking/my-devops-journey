@@ -1,5 +1,7 @@
 # Homelab: Open Items
 
+> **Historical.** The live backlog moved to the Notion "Threads" database (Category: Homelab). This file records the backlog as it stood before that move. Do not add new items here.
+
 Everything left unfinished across the Proxmox template, k3s cluster, Argo CD, and n8n work. Roughly ordered by how much each one unblocks.
 
 ## Broken / needs fixing
@@ -28,6 +30,9 @@ Currently installed by hand on every clone. Two ways to do it without breaking t
 
 **Enable the QEMU Guest Agent option on template 901**
 `qm set 901 --agent enabled=1`. Installing the package inside the guest isn't enough on its own, Proxmox also needs to be told to expect it. Enables IP reporting in the summary panel and clean filesystem freeze/thaw during backups. One-time setting on the template.
+
+**Pin the `cloudflared` image version**
+Still on `:latest` in the n8n deployment, which means it never actually updates (Argo CD sees no diff) and there's no record of what version is running. Same pitfall that left n8n four versions behind. Less urgent since cloudflared holds no data, but worth fixing.
 
 **k3s-node-3 (VM 404)**
 Cloned from the node template but never joined to the cluster. Spare capacity, ready whenever a third agent is wanted. Just needs the FritzBox reservation plus the agent install command.

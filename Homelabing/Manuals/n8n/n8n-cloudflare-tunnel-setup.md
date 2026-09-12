@@ -228,6 +228,51 @@ kubectl logs -n n8n deployment/n8n
 
 **Confirmed working.** cloudflared registered four connections to Cloudflare edge locations (dus01, fra14, fra12) with all connectivity pre-checks passing, and received its config from Cloudflare mapping `n8n.mallaegeking.org` to the internal service. n8n ran its full database migration set cleanly on first start and came up on version 2.33.7. `https://n8n.mallaegeking.org` loads.
 
+## 8. Upgrading n8n
+
+### Pin the version, don't use `:latest`
+
+The original manifest used `docker.io/n8nio/n8n:latest`. That looks like it should auto-update, but it doesn't: the tag string in Git never changes, so Argo CD sees no diff and never syncs, and the pod keeps running whatever version it first pulled. The instance sat four versions behind without any indication anything was stale.
+
+Pinning an explicit version fixes this and makes upgrades auditable:
+
+```yaml
+          image: docker.io/n8nio/n8n:2.37.9
+```
+
+With a pinned tag, `git log` on that line is the upgrade history, and rollback is `git revert`. With `latest`, there's no record of what was running before, so there's nothing to roll back to.
+
+An empty commit doesn't help either. Argo CD will notice the new revision and re-sync, but the manifests are byte-identical, so the pod spec doesn't change and nothing restarts.
+
+### Order of operations
+
+**1. Check the release notes** between the current version and the target. Patch releases rarely need manual steps, major version jumps sometimes do.
+
+**2. Back up the data volume, before pushing anything.** Upgrades run database migrations and those are one-way, rolling the image tag back does not undo them. This command runs against the *running* pod, so it has to happen before Argo CD rolls the deployment. Once the old pod is gone there's nothing left to snapshot.
+
+```
+kubectl exec -n n8n deployment/n8n -- tar czf - -C /home/node/.n8n . > n8n-backup-$(date +%F).tar.gz
+```
+
+**3. Edit the image tag, commit, push.** Argo CD picks it up and rolls the pod within a few minutes.
+
+**4. Verify:**
+
+```
+kubectl get pods -n n8n
+kubectl get pods -n n8n -o jsonpath='{.items[*].spec.containers[*].image}'
+kubectl logs -n n8n deployment/n8n
+```
+
+The logs show which migrations ran and confirm the version at startup.
+
+### Notes
+
+- **A `502 Bad Gateway` during the roll is expected.** cloudflared can't reach the service while the old pod is terminating and the new one is still pulling and running migrations. The image pull alone took about 3 minutes here.
+- **Skipping intermediate patch versions is fine.** Migrations are cumulative, n8n runs whichever haven't run yet, in order. Going 2.37.7 → 2.37.9 directly runs the same migrations as stepping through 2.37.8 first. Sequential upgrades matter for major version jumps or large gaps, not patch hops.
+- **n8n will usually show "one version behind."** It releases frequently enough that chasing zero isn't worth it. Upgrade when there's a reason: a needed fix, a wanted feature, or a security advisory.
+- **`cloudflared` is still pinned to `:latest`** in this setup, same pitfall applies. Less urgent since it holds no data, but worth pinning eventually.
+
 ## Notes
 
 - **Python task runner warning on startup** is expected, not an error. The image ships without Python 3, so Python-based Code nodes won't work. JavaScript Code nodes work normally.
